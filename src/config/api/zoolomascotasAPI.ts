@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const urlAPI = "http://localhost:8005/";
+const urlAPI = "http://192.168.2.3:4000/";
 
 const zoolomascotasAPI = axios.create({
   baseURL: urlAPI,
