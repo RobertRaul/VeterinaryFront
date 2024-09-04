@@ -30,7 +30,8 @@ export default function MyDrawerNavigator() {
         },
       }}
     >
-      <Drawer.Screen name="MyStackNavigator" component={MyStackNavigator} />
+      <Drawer.Screen 
+      name="MyStackNavigator" component={MyStackNavigator} />
     </Drawer.Navigator>
   );
 }
