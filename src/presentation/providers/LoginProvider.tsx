@@ -1,11 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { Children, PropsWithChildren, useEffect } from "react";
-import { MyRootStackParams } from "../navigation/MyStackNavigator";
+import { PropsWithChildren, useEffect } from "react";
 import { useLoginStore } from "../../actions/clientes/login.state";
-
+import { MyRootStackScreens } from "../navigation/ScreenNavigations";
 export const LoginProvider = ({ children }: PropsWithChildren) => {
-  const navigation = useNavigation<StackNavigationProp<MyRootStackParams>>();
+  const navigation = useNavigation<StackNavigationProp<MyRootStackScreens>>();
   const { status } = useLoginStore();
 
   useEffect(() => {

@@ -22,7 +22,7 @@ export const useLoginStore = create<ClienteLoginState>()((set, get) => ({
       return false;
     }
 
-    set({ status: "authenticated", user: respuesta.clienteLogeado });
+    set({ status: "authenticated", user: respuesta.clienteLogeado });    
     return true;
   },
   logout: async () => {

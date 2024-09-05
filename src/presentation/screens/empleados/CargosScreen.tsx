@@ -15,7 +15,6 @@ import { CargosModel } from "../../../domain/models/CargosModel";
 import { colors_light } from "../../../config/theme/MyTheme";
 import { MyFloatingActionButton } from "../../components/ui/MyFloatingActionButton";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { MyRootStackParams } from "../../navigation/MyStackNavigator";
 import { Formik } from "formik";
 import { CargosRespuesta } from "../../../infraestructure/interfaces/empleados.response";
 import {
@@ -23,9 +22,10 @@ import {
   getCargosById,
   updateAndCreateCargo,
 } from "../../../actions/empleados/cargos.crud";
+import { MyRootStackScreens } from "../../navigation/ScreenNavigations";
 
 export const CargosScreen = () => {
-  const navigation = useNavigation<NavigationProp<MyRootStackParams>>();
+  const navigation = useNavigation<NavigationProp<MyRootStackScreens>>();
   const queryClient = useQueryClient();
 
   const CargoId = useRef(-1);

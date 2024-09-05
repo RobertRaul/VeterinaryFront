@@ -3,23 +3,25 @@ import {
   createDrawerNavigator,
   DrawerContentComponentProps,
   DrawerContentScrollView,
-  DrawerItemList,
 } from "@react-navigation/drawer";
-import { Alert, Image, StyleSheet, useWindowDimensions } from "react-native";
+import { Alert, Image, StyleSheet } from "react-native";
 import { Button, Input, Layout } from "@ui-kitten/components";
 import { MyIcon } from "../components/ui/MyIcon";
+import { useLoginStore } from "../../actions/clientes/login.state";
 import { MyStackNavigator } from "./MyStackNavigator";
+import { DrawerActions, useNavigation } from "@react-navigation/native";
+import { useQuery } from "@tanstack/react-query";
+import { HomeScreen } from "../screens";
+
+const Drawer = createDrawerNavigator();
 
 export default function MyDrawerNavigator() {
-  const Drawer = createDrawerNavigator();
-  const dimensiones = useWindowDimensions();
-
-  return (
+  
+    return (
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawerContent {...props} />}
       screenOptions={{
-        drawerType: dimensiones.width >= 758 ? "permanent" : "slide",
-
+        drawerType: "slide",
         headerShown: false,
         drawerActiveBackgroundColor: "grey",
         drawerActiveTintColor: "white",
@@ -28,17 +30,19 @@ export default function MyDrawerNavigator() {
           borderRadius: 100,
           paddingHorizontal: 20,
         },
+        swipeEnabled: false,
       }}
     >
-      <Drawer.Screen 
-      name="MyStackNavigator" component={MyStackNavigator} />
+    
+      <Drawer.Screen name="MyStackNavigator" component={MyStackNavigator} />
     </Drawer.Navigator>
   );
 }
 
 const CustomDrawerContent = (props: DrawerContentComponentProps) => {
   const iconUser = require("../../assets/user_icon.png");
-
+  const { logout, user } = useLoginStore();
+  const navigation = useNavigation();
   return (
     <DrawerContentScrollView style={{ marginTop: 10 }}>
       <Layout style={style.imageContainer}>
@@ -48,34 +52,35 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
         <Input
           label="Nombre"
           style={style.userData}
-          value="Enriqueta Achahue Sullo"
+          value={user && user.NombreCompleto}
           keyboardType="default"
+          multiline
           accessoryLeft={<MyIcon name="person-outline" />}
         />
         <Input
           label="Correo"
           style={style.userData}
-          value="verito20@gmail.com"
+          value={user && user.email}
           keyboardType="email-address"
           accessoryLeft={<MyIcon name="email-outline" />}
         />
         <Input
           label="Direccion"
           style={style.userData}
-          value="Av. De la Cultura 3010 Jiron con Prado"
+          value={user && user.Direccion}
           multiline
           accessoryLeft={<MyIcon name="map-outline" />}
         />
         <Input
           label="Numero"
           style={style.userData}
-          value="987546532"
+          value={user && user.Telefono}
           multiline
           keyboardType="numeric"
           accessoryLeft={<MyIcon name="phone-outline" />}
         />
       </Layout>
-      <Layout>
+      {/* <Layout>
         <Button
           style={{
             ...style.userContainer,
@@ -87,22 +92,26 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
         >
           Guardar
         </Button>
-      </Layout>
+      </Layout> */}
 
       <Layout>
         <Button
           style={{
             ...style.userContainer,
-            marginTop: 280,
+            marginTop: 360,
           }}
           status="danger"
           appearance="ghost"
-          onPress={() => {}}
+          onPress={() => {
+            logout(), navigation.dispatch(DrawerActions.closeDrawer);
+          }}
         >
           Cerrar Sesión
         </Button>
       </Layout>
-      <DrawerItemList {...props} />
+
+      {/* lista de menus
+       <DrawerItemList {...props} /> */}
     </DrawerContentScrollView>
   );
 };

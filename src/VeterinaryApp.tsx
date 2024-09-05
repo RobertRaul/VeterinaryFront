@@ -1,11 +1,6 @@
 import React from "react";
 import * as eva from "@eva-design/eva";
-import {
-  ApplicationProvider,
-  IconRegistry,
-  Layout,
-  Text,
-} from "@ui-kitten/components";
+import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import MyDrawerNavigator from "./presentation/navigation/MyDrawerNavigation";
 import { NavigationContainer } from "@react-navigation/native";
@@ -22,8 +17,8 @@ export const VeterinaryApp = () => {
         <ApplicationProvider {...eva} theme={eva.light}>
           <NavigationContainer>
             <LoginProvider>
-              <MyDrawerNavigator />
-            </LoginProvider>
+            <MyDrawerNavigator /> 
+            </LoginProvider> 
           </NavigationContainer>
         </ApplicationProvider>
       </QueryClientProvider>

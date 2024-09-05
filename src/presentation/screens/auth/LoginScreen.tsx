@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { MyIcon } from "../../components/ui/MyIcon";
 import { Alert, Image, ScrollView, StyleSheet, useWindowDimensions } from "react-native";
 import { useLoginStore } from "../../../actions/clientes/login.state";
-import { StackScreenProps } from "@react-navigation/stack";
-import { MyRootStackParams } from "../../navigation/MyStackNavigator";
+import { DrawerScreenProps } from "@react-navigation/drawer";
+import { MyRootStackScreens } from "../../navigation/ScreenNavigations";
 
-interface Props extends StackScreenProps<MyRootStackParams,"LoginScreen">{}
+//interface Props extends DrawerScreenProps<MyRootStackScreens,"LoginScreen">{}
 
 
 export const LoginScreen = () => {
@@ -35,7 +35,7 @@ export const LoginScreen = () => {
   const { height } = useWindowDimensions();
   return (
     <Layout style={{ flex: 1 }}>
-      <ScrollView style={{ paddingTop: height * 0.10, marginHorizontal: 40 }}>
+      <ScrollView style={{ paddingTop: height * 0.25, marginHorizontal: 40 }}>
         <Layout style={styles.imageContainer}>
           <Image source={Logo} style={styles.imgLogo} />
         </Layout>
@@ -87,14 +87,15 @@ export const LoginScreen = () => {
             justifyContent: "center",
           }}
         >
-          <Text>¿No tienes cuenta?</Text>
+          <Text>¿No tienes una cuenta? </Text>
           <Text
             status="primary"
             category="s1"
-            onPress={() => console.log("REGISTRARSE")}
-          >
-            {" "}
-            Crear una cuenta
+            onPress={() => {
+              Alert.alert("¿Como tener una cuenta?", "Recuerda que debes tener almenos una atencion en nuestra veterinaria, luego se te dara tu usuario y contraseña.");
+            }}
+          >            
+           Mas Informacion
           </Text>
         </Layout>
       </ScrollView>
