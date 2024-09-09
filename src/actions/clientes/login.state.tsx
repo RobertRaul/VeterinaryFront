@@ -1,12 +1,12 @@
 import { create } from "zustand";
-import { ClientesModel } from "../../domain/models/ClientesModel";
+import { ClienteModel } from "../../domain/models/ClientesModel";
 import { clienteLogin } from "./clientes.login";
 
 type LoginStatus = "authenticated" | "unauthenticated";
 
 export interface ClienteLoginState {
   status: LoginStatus;
-  user?: ClientesModel;
+  user?: ClienteModel;
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => Promise<void>;
 }

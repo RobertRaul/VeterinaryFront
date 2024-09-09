@@ -1,14 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import {
-  CargosScreen,
-  CargosScreenRU,
-  CitasScreen,
-  EmpleadosScreen,
-  HomeScreen,
-  LoginScreen,
-  UbigeoScreen,
-} from "../screens";
+import { HomeScreen, LoginScreen } from "../screens";
 import { MyRootStackScreens } from "./ScreenNavigations";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {
@@ -16,6 +8,13 @@ import {
   NavigationProp,
   useNavigation,
 } from "@react-navigation/native";
+import { PacientesScreen } from "../screens/pacientes/PacientesScreen";
+import { RecetasScreen } from "../screens/recetas/RecetasScreen";
+import { PacientesMenuScreen } from "../screens/pacientes/PacientesMenuScreen";
+import { ConsultasScreen } from "../screens/consultas/ConsultasScreen";
+import { ConsultasResultadosScreen } from "../screens/consultas/ConsultasResultadosScreen";
+import { ExamenesScreen } from "../screens/examenes/ExamenesScreen";
+import { DiagnosticosScreen } from "../screens/diagnosticos/DiagnosticosScreen";
 
 const Stack = createStackNavigator<MyRootStackScreens>();
 export const MyStackNavigator = () => {
@@ -26,7 +25,7 @@ export const MyStackNavigator = () => {
         name="HomeScreen"
         component={HomeScreen}
         options={{
-          title: "Menu Principal",
+          title: "Menu",
           headerLeft: () => (
             <MaterialCommunityIcons
               name="card-account-details"
@@ -37,20 +36,54 @@ export const MyStackNavigator = () => {
           ),
         }}
       />
-      <Stack.Screen name="CargosScreen" component={CargosScreen} />
-      <Stack.Screen name="EmpleadosScreen" component={EmpleadosScreen} />
-      <Stack.Screen name="UbigeoScreen" component={UbigeoScreen} />
-      <Stack.Screen name="CargosScreenRU" component={CargosScreenRU} />
-      <Stack.Screen name="CitasScreen" component={CitasScreen} options={{title:'Mis Citas'}} />
-
-
-
-
-
       <Stack.Screen
         name="LoginScreen"
         component={LoginScreen}
         options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="PacientesScreen"
+        component={PacientesScreen}
+        options={{ title: "Mis mascotas 😻" }}
+      />
+
+      <Stack.Screen
+        name="PacientesMenuScreen"
+        component={PacientesMenuScreen}
+        options={{ title: "Acciones" }}
+      />
+
+      <Stack.Screen
+        name="RecetasScreen"
+        component={RecetasScreen}
+        options={({ route }) => ({
+          title: "Recetas de " + route.params.Nombre,
+        })}
+      />
+      <Stack.Screen
+        name="ConsultasScreen"
+        component={ConsultasScreen}
+        options={({ route }) => ({
+          title: "Consultas de " + route.params.Nombre,
+        })}
+      />
+      <Stack.Screen
+        name="ConsultasResultadosScreen"
+        component={ConsultasResultadosScreen}
+        options={({ route }) => ({ title: "Detalles de la Consulta" })}
+      />
+
+      <Stack.Screen
+        name="ExamenesScreen"
+        component={ExamenesScreen}
+        options={({ route }) => ({ title: "Examenes" })}
+      />
+
+      <Stack.Screen
+        name="DiagnosticosScreen"
+        component={DiagnosticosScreen}
+        options={({ route }) => ({ title: "Diagnosticos" })}
       />
     </Stack.Navigator>
   );

@@ -20,7 +20,7 @@ export const MyIcon = ({ name, color, white, style }: Props) => {
         color = theme['color']
     }
     return (
-        <Icon style={style} fill={color} name={name} />
+        <Icon style={style} fill={color} name={name}/>
     )
 }
 

@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const urlAPI = "http://192.168.2.3:4000/";
+//TODO: IP de la pc donde se ejecutara el BACKEND
+const urlAPI = "http://172.20.10.5:4000/vet/";
 
 const zoolomascotasAPI = axios.create({
   baseURL: urlAPI,

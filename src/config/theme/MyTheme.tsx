@@ -14,7 +14,7 @@ export interface ThemeColors {
 export const colors_light: ThemeColors = {
   primary: "#1ead25",
   text: "black",
-  background: "#f3f2f7",
+  background: "#ffffff",
   cardBackground: "white",
   buttonTextColor: "wite",
   buttonColor: "#rgb(52, 49, 206)",

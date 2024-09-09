@@ -1,20 +1,21 @@
 import { zoolomascotasAPI } from "../../config/api/zoolomascotasAPI";
-import { ClientesModel } from "../../domain/models/ClientesModel";
-import { ClientesRespuesta } from "../../infraestructure/interfaces/clientes.response";
+import { ClienteModel } from "../../domain/models/ClientesModel";
+import { ClienteRespuesta } from "../../infraestructure/interfaces/clientes.response";
 
-const returnClienteLogeado = (data: ClientesRespuesta) => {
-  const cliente: ClientesModel = {
-    IdCliente: data.IdCliente,
-    TipoDoc: data.TipoDoc,
-    NroDoc: data.NroDoc,
-    NombreCompleto: data.NombreCompleto,
-    FechaNac: data.FechaNac,
-    Direccion: data.Direccion,
+const returnClienteLogeado = (data: ClienteRespuesta) => {
+  const cliente: ClienteModel = {
+    Id: data.Id,
+    photo: data.photo,
+    names: data.names,
+    lastnames: data.lastnames,
+    document_type: data.document_type,
+    document_number: data.document_number,
+    address: data.address,
+    city: data.city,
     email: data.email,
-    password: data.password,
-    Telefono: data.Telefono,
-    Estado: data.Estado,
-    IdUbigeo: data.IdUbigeo,
+    phone: data.phone,
+    status: data.status,
+    password:    data.password,
   };
   return {
     clienteLogeado: cliente,
@@ -23,10 +24,11 @@ const returnClienteLogeado = (data: ClientesRespuesta) => {
 
 export const clienteLogin = async (email: string, password: string) => {
   try {
-    const { data } = await zoolomascotasAPI.post<ClientesRespuesta>("login/", {
+    const { data } = await zoolomascotasAPI.post<ClienteRespuesta>("login/", {
       email,
       password,
     });
+    console.log("Login Completo:", data);
     return returnClienteLogeado(data);
   } catch (error) {
     console.log(error);

@@ -1,13 +1,18 @@
 export type MyRootStackScreens = {  
   LoginScreen: undefined;
-
   HomeScreen: undefined;
+ 
+  PacientesScreen: {ClienteId:number};
 
-  CargosScreen: undefined;
-  CargosScreenRU: { CargoId: number };
+  PacientesMenuScreen: {PacienteId:number, Nombre:string};
+  RecetasScreen: {PacienteId:number, Nombre:string};
 
-  EmpleadosScreen: undefined;
-  UbigeoScreen: undefined;
+  ConsultasScreen: {PacienteId:number, Nombre:string};
+  ConsultasResultadosScreen: {ConsultaID:number};
+  
+  ExamenesScreen: {ConsultaID:number};
+  DiagnosticosScreen: {ConsultaID:number};
+  TratamientosScreen: {DiagnosticoId:number};
+  ProductosTratamientos: {TratamientoId:number};
 
-  CitasScreen:{ClienteId:number};
 };

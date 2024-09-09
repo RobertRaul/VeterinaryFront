@@ -1,20 +1,21 @@
-import { ClientesModel } from "../../domain/models/ClientesModel";
-import { ClientesRespuesta } from "../interfaces/clientes.response";
+import { ClienteModel } from "../../domain/models/ClientesModel";
+import { ClienteRespuesta } from "../interfaces/clientes.response";
 
 export class ClienteMapper {
-  static zoolAPIClienteToModel(cliente: ClientesRespuesta): ClientesModel {
+  static zoolAPIClienteToModel(cliente: ClienteRespuesta): ClienteModel {
     return {
-      IdCliente: cliente.IdCliente,
-      TipoDoc: cliente.TipoDoc,
-      NroDoc: cliente.NroDoc,
-      NombreCompleto: cliente.NombreCompleto,
-      FechaNac: cliente.FechaNac,
-      Direccion: cliente.Direccion,
+      Id: cliente.Id,
+      photo: cliente.photo,
+      names: cliente.names,
+      lastnames: cliente.lastnames,
+      document_type: cliente.document_type,
+      document_number: cliente.document_number,
+      address: cliente.address,
+      city: cliente.city,
       email: cliente.email,
+      phone: cliente.phone,
+      status: cliente.status,
       password: cliente.password,
-      Telefono: cliente.Telefono,
-      Estado: cliente.Estado,
-      IdUbigeo: cliente.IdUbigeo,
     };
   }
 }

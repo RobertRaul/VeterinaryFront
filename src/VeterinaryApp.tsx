@@ -9,7 +9,7 @@ import { LoginProvider } from "./presentation/providers/LoginProvider";
 
 const queryClient = new QueryClient();
 
-export const VeterinaryApp = () => {
+ export const VeterinaryApp = () => {
   return (
     <>
       <QueryClientProvider client={queryClient}>

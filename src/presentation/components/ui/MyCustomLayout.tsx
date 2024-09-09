@@ -15,8 +15,7 @@ export const MyCustomLayout = ({ style, children }: Properties) => {
         globalStyles.mainContainer,
         style,
         {
-          backgroundColor: colors_light.background,          
-          marginHorizontal: 20,
+          backgroundColor: colors_light.background,                    
         },
       ]}
     >

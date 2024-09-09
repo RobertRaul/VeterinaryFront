@@ -4,15 +4,13 @@ import {
   DrawerContentComponentProps,
   DrawerContentScrollView,
 } from "@react-navigation/drawer";
-import { Alert, Image, StyleSheet } from "react-native";
+import {  Image, StyleSheet } from "react-native";
 import { Button, Input, Layout } from "@ui-kitten/components";
 import { MyIcon } from "../components/ui/MyIcon";
 import { useLoginStore } from "../../actions/clientes/login.state";
 import { MyStackNavigator } from "./MyStackNavigator";
 import { DrawerActions, useNavigation } from "@react-navigation/native";
-import { useQuery } from "@tanstack/react-query";
-import { HomeScreen } from "../screens";
-
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 const Drawer = createDrawerNavigator();
 
 export default function MyDrawerNavigator() {
@@ -39,20 +37,21 @@ export default function MyDrawerNavigator() {
   );
 }
 
-const CustomDrawerContent = (props: DrawerContentComponentProps) => {
-  const iconUser = require("../../assets/user_icon.png");
+const CustomDrawerContent = (props: DrawerContentComponentProps) => {  
+
   const { logout, user } = useLoginStore();
   const navigation = useNavigation();
+  const {top} =useSafeAreaInsets()  
   return (
     <DrawerContentScrollView style={{ marginTop: 10 }}>
       <Layout style={style.imageContainer}>
-        <Image source={iconUser} style={style.image} />
+        <Image source={{uri: user && user.photo}} style={style.image} defaultSource={require('../../assets/user_icon.png')}  />
       </Layout>
       <Layout style={style.userContainer}>
         <Input
           label="Nombre"
           style={style.userData}
-          value={user && user.NombreCompleto}
+          value={user && (user.names +' '+user.lastnames)  }
           keyboardType="default"
           multiline
           accessoryLeft={<MyIcon name="person-outline" />}
@@ -63,18 +62,18 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
           value={user && user.email}
           keyboardType="email-address"
           accessoryLeft={<MyIcon name="email-outline" />}
-        />
+        />      
         <Input
           label="Direccion"
           style={style.userData}
-          value={user && user.Direccion}
+          value={user && user.address}
           multiline
           accessoryLeft={<MyIcon name="map-outline" />}
         />
         <Input
           label="Numero"
           style={style.userData}
-          value={user && user.Telefono}
+          value={user && user.phone}
           multiline
           keyboardType="numeric"
           accessoryLeft={<MyIcon name="phone-outline" />}
@@ -98,7 +97,7 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
         <Button
           style={{
             ...style.userContainer,
-            marginTop: 360,
+            marginTop: top,
           }}
           status="danger"
           appearance="ghost"

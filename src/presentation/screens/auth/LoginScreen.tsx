@@ -1,17 +1,20 @@
-import { Button, Input, Layout, Text } from "@ui-kitten/components";
+import { Button, Icon, Input, Layout, Text } from "@ui-kitten/components";
 import React, { useState } from "react";
 import { MyIcon } from "../../components/ui/MyIcon";
-import { Alert, Image, ScrollView, StyleSheet, useWindowDimensions } from "react-native";
+import { Alert, Image, ScrollView, StyleSheet, TouchableWithoutFeedback, useWindowDimensions, View } from "react-native";
 import { useLoginStore } from "../../../actions/clientes/login.state";
-import { DrawerScreenProps } from "@react-navigation/drawer";
-import { MyRootStackScreens } from "../../navigation/ScreenNavigations";
 
 //interface Props extends DrawerScreenProps<MyRootStackScreens,"LoginScreen">{}
-
 
 export const LoginScreen = () => {
   const Logo = require("../../../assets/LogoZooloMascotas.png");
   const {login} = useLoginStore();
+  const [passwordView, setPasswordView] = useState(true)
+
+  const toggleSecureEntry = (): void => {
+    setPasswordView(!passwordView);
+  };
+
 
   const [form, setForm] = useState({
     email: "",
@@ -50,7 +53,7 @@ export const LoginScreen = () => {
             style={{ marginBottom: 10 }}
             keyboardType="email-address"
             autoCapitalize="none"
-            accessoryLeft={<MyIcon name="email-outline" style={{}} />}
+            accessoryLeft={<MyIcon name="email-outline" style={{}}  />}
             value={form.email}
             onChangeText={(email) => setForm({ ...form, email })}
           />
@@ -58,10 +61,13 @@ export const LoginScreen = () => {
           <Input
             placeholder="Contraseña"
             style={{ marginBottom: 10 }}
-            secureTextEntry
-            accessoryLeft={<MyIcon name="lock-outline" style={{}} />}
+            secureTextEntry={passwordView}
+            accessoryLeft={<MyIcon name="lock-outline" style={{}}  />}
             value={form.password}
             onChangeText={(password) => setForm({ ...form, password })}
+        
+            accessoryRight={<Icon name={passwordView ? 'eye-off' : 'eye'} style={{}} onPress={toggleSecureEntry} />}
+
           />
         </Layout>
 

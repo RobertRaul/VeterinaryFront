@@ -1,8 +1,6 @@
 import React from "react";
 import { MyCustomLayout } from "../../components/ui/MyCustomLayout";
-import { ScrollView } from "react-native";
-import { EmpleadosItems } from "./MenuItems";
-import { MyMenuItem } from "../../components/ui/MyMenuItem";
+import { ScrollView, StyleSheet } from "react-native";
 import { Button } from "@ui-kitten/components";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useLoginStore } from "../../../actions/clientes/login.state";
@@ -14,7 +12,7 @@ export const HomeScreen = () => {
   const { user } = useLoginStore();
   return (
     <MyCustomLayout>
-      <ScrollView>
+      <ScrollView style={{marginHorizontal: 30,}}>
         {/* {EmpleadosItems.map((item, index) => (
           <MyMenuItem
             key={item.component}
@@ -22,21 +20,33 @@ export const HomeScreen = () => {
             isFirst={index === 0}
             isLast={index === EmpleadosItems.length - 1}
           ></MyMenuItem>
-        ))} */}
+        ))} */}     
+
         <Button
+          style={styles.button}
           size="large"
-          accessoryLeft={
-            <MaterialCommunityIcons name="doctor" size={30} color="white" />
+          status="basic"
+          appearance="outline"
+          accessoryRight={
+            <MaterialCommunityIcons name="paw-outline" size={25} color="black" />
           }
           onPress={() =>
-            navigation.navigate("CitasScreen", {
-              ClienteId: Number(user.IdCliente),
+            navigation.navigate("PacientesScreen", {
+              ClienteId: user.Id,
             })
           }
         >
-          Citas
+          Mis mascotas
         </Button>
+      
       </ScrollView>
     </MyCustomLayout>
   );
 };
+
+const styles = StyleSheet.create({
+  button: {
+    marginBottom: 10,
+    borderRadius: 18,
+  },
+});
